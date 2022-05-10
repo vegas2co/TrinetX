@@ -18,7 +18,7 @@ ranking = ['One Pair', 'Two Pair', 'Three of a kind', 'Straight', 'Flush', 'Full
 straight = ["".join(cards[i:i+5]) for i in range(0,len(cards),1)] #returns 5 cards in order e.g 6,7,8,9,0.
 
 def get_deck(obj):
-  # create a formatted string of the Python JSON object
+      # create a formatted string of the Python JSON object
   text = json.dumps(obj, sort_keys=True, indent=4)
   return text
 
