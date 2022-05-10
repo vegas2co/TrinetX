@@ -83,8 +83,8 @@ def determine_rank(userCards):
                 if (get_card_digits in straight):
                     s_counter = 8
                     v_counter = 8
-                    score = 'Straight'
-                    score_1 = 'Straight'
+                    score = 'Straight Flush'
+                    score_1 = 'Straight Flush'
                 else:
                     s_counter = 5
                     score_1 = 'Flush'
@@ -120,8 +120,8 @@ def determine_rank(userCards):
                 if (get_card_digits in straight):
                     s_counter = 8
                     v_counter = 8
-                    score = 'Straight'
-                    score_1 = 'Straight'
+                    score = 'Straight Flush'
+                    score_1 = 'Straight Flush'
                 else:
                     s_counter = 5
                     score_1 = 'Flush'
