@@ -13,6 +13,7 @@ import unittest
 new_deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
 draw_cards = requests.get("https://deckofcardsapi.com/api/deck/sqz9i7wg2lxi/draw/?count=10")
 cards = ['2','3','4','5','6','7','8','9','0','J','Q','K','A']
+ranking = ['One Pair', 'Two Pair', 'Three of a kind', 'Straight', 'Flush', 'Full House', 'Four of a kind', 'Stragith Flush']
 straight = ["".join(cards[i:i+5]) for i in range(0,len(cards),1)] #returns 5 cards in order.
 
 def get_deck(obj):
@@ -63,34 +64,32 @@ def determine_rank(userCards):
     for i in get_value_count: #get card logic for values e.g. 2-king
         if i > 1:
             v_counter = 1
-            score = 'One Pair'
+            score = ranking[0]
             v_pairs += 1
             if v_pairs == 2:
                 v_counter = 2
-                score = 'Two Pair'
+                score = ranking[1]
             if i == 3:
                 if (2 in get_value_count):
                     s_counter = 6
                     v_counter = 6
-                    score = 'Full House'
-                    score_1 = 'Full House'
+                    score = ranking[5]
+                    score_1 = ranking[5]
                 else:
                     v_counter = 3
-                    score_1 = 'Three of a kind'
+                    score_1 = ranking[2]
             if i == 4:
                 v_counter = 7
-                score = 'Four of a kind'
+                score = ranking[6]
             if i == 5:
                 if (get_card_digits in straight):
                     s_counter = 8
                     v_counter = 8
-                    score = 'Straight Flush'
-                    score_1 = 'Straight Flush'
+                    score = ranking[7]
+                    score_1 = ranking[7]
                 else:
                     s_counter = 5
-                    score_1 = 'Flush'
-        if i == 0:
-            score == 'High Card'
+                    score_1 = ranking[4]
 
     #print('symbol ' + str(get_symbol_count))
     #print('values ' + str(get_value_count))
@@ -100,41 +99,37 @@ def determine_rank(userCards):
     for i in get_symbol_count: #get card logic for symbols e.g. D,S,C,H
         if i > 1:
             s_counter = 1
-            score_1 = 'One Pair'
+            score_1 = ranking[0]
             s_pairs += 1
             if s_pairs == 2:
                 s_counter = 2
-                score_1 = 'Two Pair'
+                score_1 = ranking[1]
             if i == 3:
                 if (2 in get_symbol_count):
                     s_counter = 6
                     v_counter = 6
-                    score = 'Full House'
-                    score_1 = 'Full House'
+                    score = ranking[5]
+                    score_1 = ranking[5]
                 else:
                     s_counter = 3
-                    score_1 = 'Three of a kind'
+                    score_1 = ranking[2]
             if i == 4:
                 s_counter = 7
-                score_1 = 'Four of a kind'
+                score_1 = ranking[6]
             if i == 5:
                 if (get_card_digits in straight):
                     s_counter = 8
                     v_counter = 8
-                    score = 'Straight Flush'
-                    score_1 = 'Straight Flush'
+                    score = ranking[7]
+                    score_1 = ranking[7]
                 else:
                     s_counter = 5
-                    score_1 = 'Flush'
+                    score_1 = ranking[4]
             if (get_card_digits in straight):
                 s_counter = 4
                 v_counter = 4
-                score = 'Straight'
-                score_1 = 'Straight'
-                print('Straight')
-        if i == 0:
-            score_1 == 'High Card'
-
+                score = ranking[3]
+                score_1 = ranking[3]
 
     if s_counter > v_counter: #higher count determines winner
         if score > score_1:
@@ -173,11 +168,12 @@ class PokerTest(unittest.TestCase):
     
     def test_how_many_cards_received(self):
         cards_received = 5
-        self.assertEquals(cards_received, len(my_cards))
-        self.assertEquals(cards_received, len(computer_cards))
+        self.assertEqual(cards_received, len(my_cards))
+        self.assertEqual(cards_received, len(computer_cards))
 
 
 if __name__ == "__main__":
+    unittest.main()
     get_deck(new_deck.json())
     winner()
-    unittest.main()
+    
