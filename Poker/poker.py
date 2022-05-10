@@ -114,8 +114,8 @@ def determine_rank(userCards):
                 s_counter = 5
                 score_1 = 'Flush'
             if (get_card_digits in straight):
-                s_counter = 8
-                v_counter = 8
+                s_counter = 4
+                v_counter = 4
                 score = 'Straight'
                 score_1 = 'Straight'
                 print('Straight')
