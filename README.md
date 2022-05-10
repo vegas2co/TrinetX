@@ -1,4 +1,4 @@
-# TrinetX
+# Poker with TrinetX
 Uploading Poker functionality
 
 This program consist of multiple functions working together.
