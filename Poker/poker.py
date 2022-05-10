@@ -144,12 +144,15 @@ def determine_rank(userCards):
             print(score_1)
         return v_counter
 
+me = determine_rank(my_cards)
+opp = determine_rank(computer_cards)
+
 def winner():
     winningList = ['I Won', 'Computer won', 'Tie game']
-    if determine_rank(my_cards) > determine_rank(computer_cards):
+    if me > opp:
         print(winningList[0])
         return winningList[0]
-    elif determine_rank(my_cards) < determine_rank(computer_cards):
+    elif me < opp:
         print(winningList[1])
         return winningList[1]
     else:
@@ -170,6 +173,15 @@ class PokerTest(unittest.TestCase):
         cards_received = 5
         self.assertEqual(cards_received, len(my_cards))
         self.assertEqual(cards_received, len(computer_cards))
+    
+    def test_highest_scoring_hand(self):
+        if me > opp:
+            self.assertGreater(me,opp)
+        elif opp > me:
+           self.assertGreater(opp,me) 
+        else:
+            self.assertEqual(me,opp)
+        
 
 
 if __name__ == "__main__":
