@@ -8,7 +8,7 @@ The new_deck variable is passed into the get_deck() function to get a fresh set 
 The pass_cards() function passes 5 random cards to the computer and the player.
 
 The determine_rank() function is the brains of the program. This function examines the symbols and digits of the cards to determine the ranking categories.
-The ranking categories are [one pair, two pait, three of a kind, straight, flush, full house, four of a kind, straight flush].
+The ranking categories are [one pair, two pair, three of a kind, straight, flush, full house, four of a kind, straight flush].
 
 Lastly, the winner() function determine the winner of the game by determining who has the higher rank.
 
