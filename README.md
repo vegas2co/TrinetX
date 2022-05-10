@@ -3,7 +3,7 @@ Uploading Poker functionality
 
 This program consist of multiple functions working together.
 
-The new_deck variable is passed into the get_deck() function to get a fresh set of cards to pass out to the player and computer.
+The new_deck variable is the API call to get the cards information. That new_deck variable is then passed into the get_deck() function to get a fresh set of cards to pass out to the player and computer.
 
 The pass_cards() function passes 5 random cards to the computer and the player.
 
