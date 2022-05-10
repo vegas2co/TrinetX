@@ -8,6 +8,7 @@ Date May 10th, 2022
 import requests
 import json
 from collections import Counter
+import unittest
 
 new_deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
 draw_cards = requests.get("https://deckofcardsapi.com/api/deck/sqz9i7wg2lxi/draw/?count=10")
@@ -149,14 +150,34 @@ def determine_rank(userCards):
         return v_counter
 
 def winner():
+    winningList = ['I Won', 'Computer won', 'Tie game']
     if determine_rank(my_cards) > determine_rank(computer_cards):
-        print('I won')
+        print(winningList[0])
+        return winningList[0]
     elif determine_rank(my_cards) < determine_rank(computer_cards):
-        print('Computer won')
-    else :
-        print('Tie game')
+        print(winningList[1])
+        return winningList[1]
+    else:
+        print(winningList[2])
+        return winningList[2]
+
+class PokerTest(unittest.TestCase):
+    def test_card_amount(self):
+        card_count = 52
+        self.assertEqual(card_count, int(get_deck(new_deck.json()["remaining"])))   
+
+    def test_winner(self):
+        winning_list = ['I Won', 'Computer won', 'Tie game']
+        who_won = winner()
+        self.assertIn(who_won, winning_list)
+    
+    def test_how_many_cards_received(self):
+        cards_received = 5
+        self.assertEquals(cards_received, len(my_cards))
+        self.assertEquals(cards_received, len(computer_cards))
 
 
 if __name__ == "__main__":
     get_deck(new_deck.json())
     winner()
+    unittest.main()
