@@ -12,6 +12,7 @@ import unittest
 
 new_deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
 draw_cards = requests.get("https://deckofcardsapi.com/api/deck/sqz9i7wg2lxi/draw/?count=10")
+resuffle = requests.get("https://deckofcardsapi.com/api/deck/sqz9i7wg2lxi/shuffle/")
 cards = ['2','3','4','5','6','7','8','9','0','J','Q','K','A']
 ranking = ['One Pair', 'Two Pair', 'Three of a kind', 'Straight', 'Flush', 'Full House', 'Four of a kind', 'Straight Flush']
 straight = ["".join(cards[i:i+5]) for i in range(0,len(cards),1)] #returns 5 cards in order e.g 6,7,8,9,0.
@@ -184,5 +185,6 @@ class PokerTest(unittest.TestCase):
       
 if __name__ == "__main__":
     unittest.main()
+    resuffle
     get_deck(new_deck.json())
     winner()
