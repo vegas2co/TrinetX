@@ -11,3 +11,5 @@ The determine_rank() function is the brains of the program. This function examin
 The ranking categories are [one pair, two pait, three of a kind, straight, flush, full house, four of a kind].
 
 Lastly, the winner() function determine the winner of the game by determining who has the higher rank.
+
+This file doesn't use jokers so No [Five of a kind]. Also no High card logic, we treated high card as one pair. 
