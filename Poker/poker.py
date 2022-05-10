@@ -14,7 +14,7 @@ new_deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_c
 draw_cards = requests.get("https://deckofcardsapi.com/api/deck/sqz9i7wg2lxi/draw/?count=10")
 cards = ['2','3','4','5','6','7','8','9','0','J','Q','K','A']
 ranking = ['One Pair', 'Two Pair', 'Three of a kind', 'Straight', 'Flush', 'Full House', 'Four of a kind', 'Straight Flush']
-straight = ["".join(cards[i:i+5]) for i in range(0,len(cards),1)] #returns 5 cards in order.
+straight = ["".join(cards[i:i+5]) for i in range(0,len(cards),1)] #returns 5 cards in order e.g 6,7,8,9,0.
 
 def get_deck(obj):
     # create a formatted string of the Python JSON object
@@ -181,11 +181,8 @@ class PokerTest(unittest.TestCase):
            self.assertGreater(opp,me) 
         else:
             self.assertEqual(me,opp)
-        
-
-
+      
 if __name__ == "__main__":
     unittest.main()
     get_deck(new_deck.json())
     winner()
-    
