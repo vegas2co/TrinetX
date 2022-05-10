@@ -80,8 +80,14 @@ def determine_rank(userCards):
                 v_counter = 7
                 score = 'Four of a kind'
             if i == 5:
-                v_counter = 5
-                score = 'Flush'
+                if (get_card_digits in straight):
+                    s_counter = 8
+                    v_counter = 8
+                    score = 'Straight'
+                    score_1 = 'Straight'
+                else:
+                    s_counter = 5
+                    score_1 = 'Flush'
         if i == 0:
             score == 'High Card'
 
