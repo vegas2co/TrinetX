@@ -8,13 +8,11 @@ Date May 10th, 2022
 import requests
 import json
 from collections import Counter
-import sys
 
 new_deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
 draw_cards = requests.get("https://deckofcardsapi.com/api/deck/sqz9i7wg2lxi/draw/?count=10")
-resuffle = requests.get("https://deckofcardsapi.com/api/deck/sqz9i7wg2lxi/shuffle/")
 cards = ['2','3','4','5','6','7','8','9','0','J','Q','K','A']
-straight = ["".join(cards[i:i+5]) for i in range(0,len(cards),1)]
+straight = ["".join(cards[i:i+5]) for i in range(0,len(cards),1)] #returns 5 cards in order.
 
 def get_deck(obj):
     # create a formatted string of the Python JSON object
@@ -36,11 +34,6 @@ def pass_cards():
         computer = passed_out_cards[5:]
     print('My cards ' + str(cards_to_read[:5]))
     print('Computer cards ' + str(cards_to_read[5:]))
-    return me, computer
-
-def known_cards():
-    me = ['2 SPADES', '3 DIAMONDS', '4 DIAMONDS', '5 DIAMONDS', '6 DIAMONDS']
-    computer = ['4 HEARTS', '5 SPADES', '6 HEARTS', '7 HEARTS', '8 DIAMONDS']
     return me, computer
 
 my_cards, computer_cards = pass_cards()
