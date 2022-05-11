@@ -19,7 +19,7 @@ straight = ["".join(cards[i:i+5]) for i in range(0,len(cards),1)] #returns 5 car
 winning_list = ['I Won', 'Computer won', 'Tie game']
 
 def get_deck(obj):
-      # create a formatted string of the Python JSON object
+  # create a formatted string of the Python JSON object
   text = json.dumps(obj, sort_keys=True, indent=4)
   return text
 
@@ -63,7 +63,7 @@ def determine_rank(userCards):
   get_symbol_count = s.values()
   get_card_digits = v.keys()
 
-  for i in get_value_count: #get card logic for values e.g. 2-king
+  for i in get_value_count: #get card logic for values e.g. 2 - king
     if i > 1:
       v_counter = 1
       score = ranking[0]
