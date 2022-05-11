@@ -10,12 +10,13 @@ import json
 from collections import Counter
 import unittest
 
-new_deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
+new_deck = requests.get("https://deckofcardsapi.com/api/deck/new/?deck_count=1")
 draw_cards = requests.get("https://deckofcardsapi.com/api/deck/sqz9i7wg2lxi/draw/?count=10")
 resuffle = requests.get("https://deckofcardsapi.com/api/deck/sqz9i7wg2lxi/shuffle/")
 cards = ['2','3','4','5','6','7','8','9','0','J','Q','K','A']
 ranking = ['One Pair', 'Two Pair', 'Three of a kind', 'Straight', 'Flush', 'Full House', 'Four of a kind', 'Straight Flush']
 straight = ["".join(cards[i:i+5]) for i in range(0,len(cards),1)] #returns 5 cards in order e.g 6,7,8,9,0.
+winning_list = ['I Won', 'Computer won', 'Tie game']
 
 def get_deck(obj):
       # create a formatted string of the Python JSON object
@@ -72,25 +73,25 @@ def determine_rank(userCards):
         score = ranking[1]
       if i == 3:
         if (2 in get_value_count):
-          s_counter = 6
           v_counter = 6
           score = ranking[5]
-          score_1 = ranking[5]
         else:
           v_counter = 3
-          score_1 = ranking[2]
+          score = ranking[2]
       if i == 4:
         v_counter = 7
         score = ranking[6]
       if i == 5:
         if (get_card_digits in straight):
-          s_counter = 8
           v_counter = 8
           score = ranking[7]
           score_1 = ranking[7]
         else:
           s_counter = 5
-          score_1 = ranking[4]
+          score = ranking[4]
+      if (get_card_digits in straight):
+          v_counter = 4
+          score = ranking[3]
 
   for i in get_symbol_count: #get card logic for symbols e.g. D,S,C,H
     if i > 1:
@@ -103,8 +104,6 @@ def determine_rank(userCards):
       if i == 3:
         if (2 in get_symbol_count):
           s_counter = 6
-          v_counter = 6
-          score = ranking[5]
           score_1 = ranking[5]
         else:
           s_counter = 3
@@ -115,17 +114,11 @@ def determine_rank(userCards):
       if i == 5:
         if (get_card_digits in straight):
             s_counter = 8
-            v_counter = 8
             score = ranking[7]
             score_1 = ranking[7]
         else:
             s_counter = 5
             score_1 = ranking[4]
-      if (get_card_digits in straight):
-          s_counter = 4
-          v_counter = 4
-          score = ranking[3]
-          score_1 = ranking[3]
 
   if s_counter > v_counter: #higher count determines winner
     if score > score_1:
@@ -133,7 +126,7 @@ def determine_rank(userCards):
     else:
       print(score_1)
     return s_counter
-  else:
+  if v_counter > s_counter:
     if score > score_1:
       print(score)
     else:
@@ -144,16 +137,15 @@ me = determine_rank(my_cards)
 opp = determine_rank(computer_cards)
 
 def winner():
-  winningList = ['I Won', 'Computer won', 'Tie game']
   if me > opp:
-    print(winningList[0])
-    return winningList[0]
+    print(winning_list[0])
+    return winning_list[0]
   elif me < opp:
-    print(winningList[1])
-    return winningList[1]
+    print(winning_list[1])
+    return winning_list[1]
   else:
-    print(winningList[2])
-    return winningList[2]
+    print(winning_list[2])
+    return winning_list[2]
 
 class PokerTest(unittest.TestCase):
   def test_card_amount(self):
@@ -161,7 +153,6 @@ class PokerTest(unittest.TestCase):
     self.assertEqual(card_count, int(get_deck(new_deck.json()["remaining"])))   
 
   def test_winner(self):
-    winning_list = ['I Won', 'Computer won', 'Tie game']
     who_won = winner()
     self.assertIn(who_won, winning_list)
     
