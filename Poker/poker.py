@@ -29,7 +29,6 @@ def pass_cards():
   passed_out_cards = []
   cards_to_read = []
   for i in draw_cards.json()['cards']: #pass 5 cards to me
-    #print(i['suit'] + ' ' + i['value']) #read cards dealed
     cards = i['code'] #add cards to stack
     output = i['value'] + ' ' + i['suit']
     passed_out_cards.append(cards)
@@ -72,7 +71,7 @@ def determine_rank(userCards):
         v_counter = 2
         score = ranking[1]
       if i == 3:
-        if (2 in get_value_count):
+        if (2 in get_value_count): #or (2 in get_symbol_count and 2 not in get_value_count):
           v_counter = 6
           score = ranking[5]
         else:
@@ -102,7 +101,7 @@ def determine_rank(userCards):
         s_counter = 2
         score_1 = ranking[1]
       if i == 3:
-        if (2 in get_symbol_count):
+        if (2 in get_symbol_count): #or (2 in get_value_count and 2 not in get_symbol_count):
           s_counter = 6
           score_1 = ranking[5]
         else:
@@ -174,3 +173,4 @@ if __name__ == "__main__":
   resuffle
   get_deck(new_deck.json())
   winner()
+  
